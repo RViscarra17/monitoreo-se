@@ -8,11 +8,11 @@ class Prueba extends Model
 {
     //
     protected $fillable = [
-        'nombre'
+        'nombre', 'activo', 'atributo_largo'
     ];
 
-    public function relacion()
+    public function tablaAparte()
     {
-        return $this->hasMany(Autor::class);
+        return $this->hasMany(TablaAparte::class);
     }
 }
