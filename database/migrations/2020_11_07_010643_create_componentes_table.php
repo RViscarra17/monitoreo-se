@@ -15,6 +15,10 @@ class CreateComponentesTable extends Migration
     {
         Schema::create('componentes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('sistema_embebido_id')->constrained();
+            $table->foreignId('tipo_dato_id')->constrained();
+            $table->foreignId('unidad_id')->constrained();
+            $table->string('nombre');
             $table->timestamps();
         });
     }
