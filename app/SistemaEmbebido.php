@@ -8,7 +8,7 @@ class SistemaEmbebido extends Model
 {
     //
     protected $fillable = [
-        'id_usuario','nombre','activo'
+        'usuario_id','nombre','activo'
     ];
 
     public function usuario()
