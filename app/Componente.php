@@ -26,7 +26,7 @@ class Componente extends Model
         return $this->belongsTo(Unidad::class);
     }
 
-    public function medicion()
+    public function mediciones()
     {
         return $this->hasMany(Medicion::class);
     }

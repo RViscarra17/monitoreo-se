@@ -15,6 +15,8 @@ class CreateMedicionsTable extends Migration
     {
         Schema::create('medicions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('componente_id')->constrained();
+            $table->string('valor');
             $table->timestamps();
         });
     }

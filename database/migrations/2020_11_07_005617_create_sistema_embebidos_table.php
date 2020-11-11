@@ -15,6 +15,9 @@ class CreateSistemaEmbebidosTable extends Migration
     {
         Schema::create('sistema_embebidos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained();
+            $table->string('nombre');
+            $table->boolean('activo');
             $table->timestamps();
         });
     }
