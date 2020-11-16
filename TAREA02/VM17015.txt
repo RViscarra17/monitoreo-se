@@ -1,1 +1,12 @@
-Comandos usados desde Tinker
+Comandos usados desde Tinker:
+$autores = Autor::all()
+$autor = Autor::find(2)
+$libros = Libro::all()
+$autor
+$autor->edad = 35
+$autor
+$autor->save()
+$autores = Autor::all()
+$libro = Libro::find(3)
+$libro->delete()
+$libros = Libro::all()

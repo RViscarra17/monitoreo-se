@@ -15,7 +15,7 @@ class CreateUnidadsTable extends Migration
     {
         Schema::create('unidads', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->nullable();
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
             $table->string('nombre');
             $table->string('abreviacion')->nullable();
             $table->timestamps();
