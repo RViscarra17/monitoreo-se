@@ -19,5 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/componente','ComponenteController@index')->name('componente.index');
+Route::get('/componente/{id}','ComponenteController@show')->name('componente.show');
+Route::post('/componente','ComponenteController@store')->name('componente.store');
 Route::put('/componente/{id}','ComponenteController@update')->name('componente.update');
 Route::delete('/componente/{id}','ComponenteController@destroy')->name('componente.destroy');
