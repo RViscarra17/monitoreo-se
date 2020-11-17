@@ -81,8 +81,7 @@ class AutorController extends Controller
     public function update(Request $request, $id)
     {
         //
-
-        try {
+      try {
             $autor = Autor::findOrFail($id);
             // dd($autor);
         } catch (ModelNotFoundException $th) {
@@ -119,7 +118,7 @@ class AutorController extends Controller
     public function destroy($id)
     {
         //
-        try {
+      try {
             $autor = Autor::findOrFail($id);
             // dd($autor);
         } catch (ModelNotFoundException $th) {
