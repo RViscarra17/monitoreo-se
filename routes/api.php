@@ -32,4 +32,5 @@ Route::delete('/componente/{id}','ComponenteController@destroy')->name('componen
 
 Route::apiResource('mediciones', 'MedicionController');
 Route::apiResource('unidades', 'UnidadController');
+Route::apiResource('sistemas', 'SistemaEmbebidoController');
 
