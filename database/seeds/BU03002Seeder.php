@@ -1,10 +1,5 @@
 <?php
 
-use App\Unidad;
-use App\Medicion;
-use App\TipoDato;
-use App\Componente;
-use App\SistemaEmbebido;
 use Illuminate\Database\Seeder;
 
 class BU03002Seeder extends Seeder
@@ -16,12 +11,12 @@ class BU03002Seeder extends Seeder
      */
     public function run()
     {
-        SistemaEmbebido::create([
+        //SistemaEmbebido::create([
             'user_id'=>1,
             'nombre'=>"Sistema de prueba 1",
             'activo'=>true
         ]);
-        SistemaEmbebido::create([
+        Sistemaembebido::create([
             'user_id'=>1,
             'nombre'=>"Sistema de prueba 2",
             'activo'=>false
