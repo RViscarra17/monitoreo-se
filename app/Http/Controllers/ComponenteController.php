@@ -95,35 +95,30 @@ class ComponenteController extends Controller
         {
             return response()->json(['data'=>'no se envio informacion',200]);
         }
-        elseif(isset($request->sistema_embebido_id))
+       
+
+        if(isset($request->sistema_embebido_id))
         {
             $componente->sistema_embebido_id = $request->sistema_embebido_id;
-            $componente->save();
+            
         }
-        elseif(isset($request->tipo_dato_id))
+        if(isset($request->tipo_dato_id))
         {
             $componente->tipo_dato_id=$request->tipo_dato_id;
-            $componente->save();
+            
         }
-        elseif(isset($request->unidad_id))
+        if(isset($request->unidad_id))
         {
             $componente->unidad_id=$request->unidad_id;
-            $componente->save();
+            
         }
-        elseif(isset($request->nombre))
+        if(isset($request->nombre))
         {
             $componente->nombre = $request->nombre;
-            $componente->save();
+            
         }
-        else
-        {
-            $componente->sistema_embebido_id = $request->sistema_embebido_id;
-            $componente->tipo_dato_id = $request->tipo_dato_id;
-            $componente->unidad_id = $request->unidad_id;
-            $componente->nombre = $request->nombre;
-            $componente->save();
 
-        }
+        $componente->save();
         return response()->json(['data'=>'se ha modificado el registro',200]);
     }
 
