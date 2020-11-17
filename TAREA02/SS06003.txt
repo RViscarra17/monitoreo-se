@@ -1,7 +1,0 @@
-Comandos usados desde Tinker:
-
-$tipodato - TipoDato::find(2)
-$componente = Componente::all()
-$mediciones = Medicion::all()
-$Unidades = unidad::all()
-
