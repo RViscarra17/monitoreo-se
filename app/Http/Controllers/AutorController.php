@@ -50,7 +50,7 @@ class AutorController extends Controller
             return response()->json(['error' => 'No se pudo guardar en la base de datos'], 400);
         }
 
-        return response()->json($autor, 200);
+        return response()->json($autor, 201);
     }
 
     /**

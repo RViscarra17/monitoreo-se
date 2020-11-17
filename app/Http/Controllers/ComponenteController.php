@@ -17,7 +17,7 @@ class ComponenteController extends Controller
     public function index()
     {
         //
-      
+
         $componentes = Componente::all();
         return response()->json($componentes,200);
     }
@@ -31,7 +31,7 @@ class ComponenteController extends Controller
     public function store(Request $request)
     {
         //
-      
+
         // dd($request->all());
      if(!isset($request->sistema_embebido_id)){
         return response()->json(['error'=>'No ingreso el id del sistema embebido'],400);
@@ -56,7 +56,7 @@ class ComponenteController extends Controller
      }catch(QueryException $t){
         return response()->json(['error'=>'El componente no se pudo almacenar en la base de datos'],400);
      }
-     return response()->json($componente,200);
+     return response()->json($componente,201);
     }
 
     /**
@@ -95,33 +95,33 @@ class ComponenteController extends Controller
 
         if(!isset($request->sistema_embebido_id) && !isset($request->tipo_dato_id) && !isset($request->unidad_id) && !isset($request->nombre))
         {
-            return response()->json(['data'=>'no se envio informacion',200]);
+            return response()->json(['data'=>'no se envio informacion'],400.6);
         }
-       
+
 
         if(isset($request->sistema_embebido_id))
         {
             $componente->sistema_embebido_id = $request->sistema_embebido_id;
-            
+
         }
         if(isset($request->tipo_dato_id))
         {
             $componente->tipo_dato_id=$request->tipo_dato_id;
-            
+
         }
         if(isset($request->unidad_id))
         {
             $componente->unidad_id=$request->unidad_id;
-            
+
         }
         if(isset($request->nombre))
         {
             $componente->nombre = $request->nombre;
-            
+
         }
 
         $componente->save();
-        return response()->json(['data'=>'se ha modificado el registro',200]);
+        return response()->json(['data'=>'se ha modificado el registro'],200);
     }
 
     /**
