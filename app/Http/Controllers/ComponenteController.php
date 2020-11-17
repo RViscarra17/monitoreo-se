@@ -17,6 +17,7 @@ class ComponenteController extends Controller
     public function index()
     {
         //
+      
         $componentes = Componente::all();
         return response()->json($componentes,200);
     }
@@ -30,6 +31,7 @@ class ComponenteController extends Controller
     public function store(Request $request)
     {
         //
+      
         // dd($request->all());
      if(!isset($request->sistema_embebido_id)){
         return response()->json(['error'=>'No ingreso el id del sistema embebido'],400);

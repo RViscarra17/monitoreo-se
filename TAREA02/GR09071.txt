@@ -1,0 +1,7 @@
+comandos usados desde tinker:
+$sistemaEmb = SistemaEmbebido::all()
+$componente = Componente::all()
+$mediciones = Medicion::all()
+$medicion2 = Medicion::find(2)
+$medicion2->delete()
+$mediciones = Medidicion::all()
