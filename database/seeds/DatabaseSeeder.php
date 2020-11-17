@@ -15,5 +15,8 @@ class DatabaseSeeder extends Seeder
         $this->call(VM17015Seeder::class);
         $this->call(PruebaSeeder::class);
         $this->call(MP19084Seeder::class);
+        $this->call(AL13013Seeder::class);
+        $this->call(GR09071Seeder::class);
+
     }
 }

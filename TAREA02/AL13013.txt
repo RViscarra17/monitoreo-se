@@ -1,0 +1,4 @@
+php artisan db:seed
+php artisan migrate:fresh
+$list = App\User::all();
+$list = App\SistemaEmbebido::all();
