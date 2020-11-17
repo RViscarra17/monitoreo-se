@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MP19084Seeder::class);
         $this->call(AL13013Seeder::class);
         $this->call(GR09071Seeder::class);
-
+        $this->call(BU03002Seeder::class);
+      
     }
 }
