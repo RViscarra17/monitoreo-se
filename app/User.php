@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'codigo_usuario',
     ];
 
     /**
@@ -36,4 +36,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function sistemaEmbebidos()
+    {
+        return $this->hasMany(SistemaEmbebido::class);
+    }
+
+    public function unidades()
+    {
+        return $this->hasMany(Unidad::class);
+    }
+
 }
