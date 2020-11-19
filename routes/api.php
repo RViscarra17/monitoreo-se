@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\SistemaEmbebidoController;
+use App\SistemaEmbebido;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +18,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+    Route::get('/sistema', 'SistemaEmbebidoController@index')->('name.index');
+    Route::get('/sistema/{id}','SistemaEmbebidoController@show')->('name.show');
+    Route::post('/sistema','SistemaEmbebidoController@store')->('name.store');
+    Route::put('/sistema/{id}', 'SistemaEmbebidoController@update')->('name.update');
+    Route::delete('/sistema/{id}','SistemaEmbebidoController@destroy')->('name.destroy');
+
+
+
 });
