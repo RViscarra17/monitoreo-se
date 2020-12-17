@@ -96,7 +96,7 @@ class MedicionController extends Controller
 
         if(!isset($request->componente_id) && !isset($request->valor))
         {
-            return response()->json(['data'=>'no se envio informacion'],400.6);
+            return response()->json(['error'=>'Se requiere un campo como mínimo.'],400.6);
         }
 
 

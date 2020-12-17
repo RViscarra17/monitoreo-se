@@ -95,7 +95,7 @@ class ComponenteController extends Controller
 
         if(!isset($request->sistema_embebido_id) && !isset($request->tipo_dato_id) && !isset($request->unidad_id) && !isset($request->nombre))
         {
-            return response()->json(['data'=>'no se envio informacion'],400.6);
+            return response()->json(['error'=>'Se requiere un campo como mínimo.'],400.6);
         }
 
 

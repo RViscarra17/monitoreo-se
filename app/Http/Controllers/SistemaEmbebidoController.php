@@ -96,7 +96,7 @@ class SistemaEmbebidoController extends Controller
 
         if(!isset($request->user_id) && !isset($request->nombre) && !isset($request->activo))
         {
-            return response()->json(['data'=>'no se envio informacion'],400.6);
+            return response()->json(['error'=>'Se requiere un campo como mínimo.'],400.6);
         }
 
 
