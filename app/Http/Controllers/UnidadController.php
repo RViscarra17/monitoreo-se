@@ -101,7 +101,7 @@ class UnidadController extends Controller
 
         if(!isset($request->nombre) && !isset($request->user_id) && !isset($request->abreviacion))
         {
-            return response()->json(['data'=>'Como minimo se requiere un nombre'],400.6);
+            return response()->json(['error'=>'Se requiere un campo como mínimo.'],400.6);
         }
 
 
