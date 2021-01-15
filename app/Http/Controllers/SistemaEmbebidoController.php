@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
+use function PHPUnit\Framework\isEmpty;
+
 class SistemaEmbebidoController extends Controller
 {
     /**
@@ -143,5 +145,22 @@ class SistemaEmbebidoController extends Controller
 
         $sistemaEmbebido->delete();
         return response()->json(['data'=> 'Se elimino correctamente','sistema embebido'=> $sistemaEmbebido],200);
+    }
+
+    public function completo ($id)
+    {
+        try {
+            User::findOrFail($id);
+        } catch (ModelNotFoundException $th) {
+            return response()->json(['error'=> 'El usuario no existe'],404);
+        }
+
+        try {
+            $sistemaEmbebidos = SistemaEmbebido::where('user_id', $id)->with('componentes', 'componentes.tipoDato', 'componentes.unidad')->get();
+        } catch (ModelNotFoundException $th) {
+            return response()->json(['error'=> 'El usuario no existe'],404);
+        }
+
+        return response()->json($sistemaEmbebidos, 200);
     }
 }

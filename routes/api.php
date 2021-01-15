@@ -28,4 +28,5 @@ Route::apiResource('componente', 'ComponenteController');
 Route::apiResource('mediciones', 'MedicionController');
 Route::apiResource('unidades', 'UnidadController');
 Route::apiResource('sistemas', 'SistemaEmbebidoController');
+Route::get('/{id}/sistema/componentes', 'SistemaEmbebidoController@completo')->name('sistema.completo');
 
