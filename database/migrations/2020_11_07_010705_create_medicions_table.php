@@ -17,6 +17,7 @@ class CreateMedicionsTable extends Migration
             $table->id();
             $table->foreignId('componente_id')->constrained()->onDelete('cascade');
             $table->string('valor');
+            $table->timestamp('hora_medicion');
             $table->timestamps();
         });
     }

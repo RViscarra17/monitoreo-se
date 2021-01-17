@@ -138,4 +138,9 @@ class MedicionController extends Controller
         $medicion->delete();
         return response()->json(['data'=> 'Se elimino correctamente','medicion'=> $medicion],200);
     }
+
+    public function guardarMediciones (Request $request, $id)
+    {
+        dd($request);
+    }
 }
