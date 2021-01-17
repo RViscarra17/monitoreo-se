@@ -37,7 +37,7 @@ class MedicionController extends Controller
         try {
             Componente::findOrFail($request->componente_id);
         } catch (ModelNotFoundException $th) {
-            return response()->json(['error'=> 'El componente no existe'],404);
+            return response()->json(['error' => 'El componente no existe'], 404);
         }
 
         if (!isset($request->componente_id)) {
@@ -72,10 +72,10 @@ class MedicionController extends Controller
         try {
             $medicion = Medicion::findOrFail($id);
         } catch (ModelNotFoundException $th) {
-            return response()->json(['error'=> 'No se encuentra la medicion'],404);
+            return response()->json(['error' => 'No se encuentra la medicion'], 404);
         }
 
-        return response()->json($medicion,200);
+        return response()->json($medicion, 200);
     }
 
     /**
@@ -91,35 +91,30 @@ class MedicionController extends Controller
         try {
             $medicion = Medicion::findOrFail($id);
         } catch (ModelNotFoundException $th) {
-            return response()->json(['error'=> 'No se encuentra la medicion'],404);
+            return response()->json(['error' => 'No se encuentra la medicion'], 404);
         }
 
 
 
-        if(!isset($request->componente_id) && !isset($request->valor))
-        {
-            return response()->json(['error'=>'Se requiere un campo como mínimo.'],400.6);
+        if (!isset($request->componente_id) && !isset($request->valor)) {
+            return response()->json(['error' => 'Se requiere un campo como mínimo.'], 400.6);
         }
 
 
-        if(isset($request->componente_id))
-        {
+        if (isset($request->componente_id)) {
             try {
                 Componente::findOrFail($request->componente_id);
             } catch (ModelNotFoundException $th) {
-                return response()->json(['error'=> 'El componente no existe'],404);
+                return response()->json(['error' => 'El componente no existe'], 404);
             }
             $medicion->componente_id = $request->componente_id;
-
         }
-        if(isset($request->valor))
-        {
-            $medicion->valor=$request->valor;
-
+        if (isset($request->valor)) {
+            $medicion->valor = $request->valor;
         }
 
         $medicion->save();
-        return response()->json(['data'=>'se ha modificado el registro', 'medicion' => $medicion],200);
+        return response()->json(['data' => 'se ha modificado el registro', 'medicion' => $medicion], 200);
     }
 
     /**
@@ -134,43 +129,39 @@ class MedicionController extends Controller
         try {
             $medicion = Medicion::findOrFail($id);
         } catch (ModelNotFoundException $th) {
-            return response()->json(['error'=> 'No se encuentra la medicion'],404);
+            return response()->json(['error' => 'No se encuentra la medicion'], 404);
         }
 
         $medicion->delete();
-        return response()->json(['data'=> 'Se elimino correctamente','medicion'=> $medicion],200);
+        return response()->json(['data' => 'Se elimino correctamente', 'medicion' => $medicion], 200);
     }
 
-    public function guardarMediciones (Request $request, $id)
+    public function guardarMediciones(Request $request, $id)
     {
-        // dd($request);
-        // return "hola";
-        // $data = $request->all();
-        // $data = json_encode($data);
-        // $data = json_decode($data);
-        // $horaInicio = $data[0]['componentes'];
-        // $hora = $horaInicio;
-
-
-
         $data = $request->all();
 
         try {
             $sistemaEmbebido = SistemaEmbebido::findOrFail($data[0]['canal']);
-            Componente::findOrFail($data[0]['componentes'][0]['id']);
+            $componentes = $data[0]['componentes'];
+            foreach ($componentes as $componente) {
+                Componente::findOrFail($componente['id']);
+            }
         } catch (ModelNotFoundException $th) {
-            return response()->json(['error'=> 'El sistema embebido o los componentes no existen'],404);
+            return response()->json(['error' => 'El sistema embebido o los componentes no existen'], 404);
         }
 
         $horaInicial = $data[0]['hora_medicion'];
         $horaFinal = end($data)['hora_medicion'];
-        // $sistemaEmbebido = $data[0]['canal'];
 
-        $sesion = Sesion::create([
-            'sistema_embebido_id' => $sistemaEmbebido->id,
-            'inicio' => $horaInicial,
-            'fin' => $horaFinal,
-        ]);
+        try {
+            $sesion = Sesion::create([
+                'sistema_embebido_id' => $sistemaEmbebido->id,
+                'inicio' => $horaInicial,
+                'fin' => $horaFinal,
+            ]);
+        } catch (QueryException $th) {
+            return response()->json(['error' => 'No se pudo guardar en la base de datos'], 400);
+        }
 
         foreach ($data as $fila) {
             foreach ($fila['componentes'] as $medicion) {
@@ -186,10 +177,9 @@ class MedicionController extends Controller
                 } catch (QueryException $th) {
                     return response()->json(['error' => 'No se pudo guardar en la base de datos'], 400);
                 }
-
             }
         }
 
-        return response()->json(['data' => 'Guardado con exito'],201);
+        return response()->json(['data' => 'Guardado con exito'], 201);
     }
 }
