@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Medicion;
 use App\Componente;
+use App\Sesion;
+use App\SistemaEmbebido;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -142,6 +144,52 @@ class MedicionController extends Controller
     public function guardarMediciones (Request $request, $id)
     {
         // dd($request);
-        return response()->json(['data'=> 'Hola Mundo'],200);
+        // return "hola";
+        // $data = $request->all();
+        // $data = json_encode($data);
+        // $data = json_decode($data);
+        // $horaInicio = $data[0]['componentes'];
+        // $hora = $horaInicio;
+
+
+
+        $data = $request->all();
+
+        try {
+            $sistemaEmbebido = SistemaEmbebido::findOrFail($data[0]['canal']);
+            Componente::findOrFail($data[0]['componentes'][0]['id']);
+        } catch (ModelNotFoundException $th) {
+            return response()->json(['error'=> 'El sistema embebido o los componentes no existen'],404);
+        }
+
+        $horaInicial = $data[0]['hora_medicion'];
+        $horaFinal = end($data)['hora_medicion'];
+        // $sistemaEmbebido = $data[0]['canal'];
+
+        $sesion = Sesion::create([
+            'sistema_embebido_id' => $sistemaEmbebido->id,
+            'inicio' => $horaInicial,
+            'fin' => $horaFinal,
+        ]);
+
+        foreach ($data as $fila) {
+            foreach ($fila['componentes'] as $medicion) {
+                // return response()->json($medicion, 200);
+
+                try {
+                    Medicion::create([
+                        'componente_id' => $medicion['id'],
+                        'sesion_id' => $sesion->id,
+                        'valor' => $medicion['medicion'],
+                        'hora_medicion' => $fila['hora_medicion'],
+                    ]);
+                } catch (QueryException $th) {
+                    return response()->json(['error' => 'No se pudo guardar en la base de datos'], 400);
+                }
+
+            }
+        }
+
+        return response()->json(['data' => 'Guardado con exito'],201);
     }
 }
