@@ -141,6 +141,7 @@ class MedicionController extends Controller
 
     public function guardarMediciones (Request $request, $id)
     {
-        dd($request);
+        // dd($request);
+        return response()->json(['data'=> 'Hola Mundo'],200);
     }
 }
