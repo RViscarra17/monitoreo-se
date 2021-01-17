@@ -136,7 +136,7 @@ class MedicionController extends Controller
         return response()->json(['data' => 'Se elimino correctamente', 'medicion' => $medicion], 200);
     }
 
-    public function guardarMediciones(Request $request, $id)
+    public function guardarMediciones(Request $request)
     {
         $data = $request->all();
 
