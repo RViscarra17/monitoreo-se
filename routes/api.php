@@ -28,7 +28,12 @@ Route::apiResource('componente', 'ComponenteController');
 Route::apiResource('mediciones', 'MedicionController');
 Route::apiResource('unidades', 'UnidadController');
 Route::apiResource('sistemas', 'SistemaEmbebidoController');
+
+
 Route::get('/sistemas/componentes/{id}', 'SistemaEmbebidoController@completo')->name('sistema.completo');
 Route::get('/sistema/componentes/{id}', 'SistemaEmbebidoController@sistemaComponentes')->name('sistema.componentes');
-Route::post('/sistema/componentes/mediciones', 'MedicionController@guardarMediciones')->name('medicion.guardarTodo');
+
+
+Route::post('/sesion', 'MedicionController@guardarMediciones')->name('medicion.guardarTodo');
 Route::get('/sesiones/{id}', 'SesionController@show')->name('sesion.show');
+Route::get('/sesion/{id}', 'SesionController@verMediciones')->name('sesion.verMediciones');

@@ -21,4 +21,9 @@ class SesionController extends Controller
 
         return response()->json($sesiones, 200);
     }
+
+    public function verMediciones ($id)
+    {
+        return response()->json(['data'=>'Endpoint en construccion'], 200);
+    }
 }
