@@ -163,4 +163,15 @@ class SistemaEmbebidoController extends Controller
 
         return response()->json($sistemaEmbebidos, 200);
     }
+
+    public function sistemaComponentes ($id)
+    {
+        try {
+            $sistemaEmbebido = SistemaEmbebido::with('componentes', 'componentes.tipoDato', 'componentes.unidad')->findOrFail($id);
+        } catch (ModelNotFoundException $th) {
+            return response()->json(['error'=> 'No se encuentra el sistema embebido'],404);
+        }
+
+        return response()->json($sistemaEmbebido,200);
+    }
 }
