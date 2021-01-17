@@ -21,4 +21,9 @@ class SistemaEmbebido extends Model
     {
         return $this->hasMany(Componente::class);
     }
+
+    public function sesiones ()
+    {
+        return $this->hasMany(Sesion::class);
+    }
 }
